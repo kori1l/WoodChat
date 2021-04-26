@@ -1,0 +1,6 @@
+# Project exclude paths
+/.gradle/
+/WoodChatClient/build/
+/WoodChatClient/build/classes/java/main/
+/WoodChatServer/build/
+/WoodChatServer/build/classes/java/main/
