@@ -55,7 +55,6 @@ public class ChatServer implements ConnectionObserver {
                 Iterator<User> itr1 = activeUserSet.values().iterator();
                 while (itr1.hasNext()) {
                     if (itr1.next().getUserName().equals(user.getUserName())) {
-                        System.out.println("привет");
                         userExist = true;
                     }
                 }
@@ -105,11 +104,10 @@ public class ChatServer implements ConnectionObserver {
         getAllUsers();
         Iterator<User> iterator = userSetDB.iterator();
         long id = 0;
-        System.out.println("addMDB 1");
         if (userSetDB.size() != 0) {
             while (iterator.hasNext()) {
                 User iterUser = iterator.next();
-                if (!iterUser.getUserName().equals(message.getUser().getUserName())) {
+                if (iterUser.getUserName().equals(message.getUser().getUserName())) {
                     id = iterUser.getUserId();
                 }
             }
