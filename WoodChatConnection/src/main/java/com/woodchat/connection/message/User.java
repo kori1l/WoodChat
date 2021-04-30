@@ -1,8 +1,7 @@
-package com.woodchat.server.message;
+package com.woodchat.connection.message;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.net.Socket;
 import java.util.Objects;
 
 public class User implements Serializable {

@@ -1,15 +1,13 @@
 package com.woodchat.client;
 
-import com.woodchat.client.*;
 import com.woodchat.client.forms.RoundedBorder;
-import com.woodchat.server.message.Message;
-import com.woodchat.server.message.User;
-import com.woodchat.server.network.SocketConnection;
-import com.woodchat.server.network.ConnectionObserver;
+import com.woodchat.connection.message.Message;
+import com.woodchat.connection.message.User;
+import com.woodchat.connection.network.SocketConnection;
+import com.woodchat.connection.network.ConnectionObserver;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

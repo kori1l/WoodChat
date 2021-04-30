@@ -2,8 +2,8 @@ package com.woodchat.server;
 
 import com.woodchat.server.dataBase.MessagesTable;
 import com.woodchat.server.dataBase.UsersTable;
-import com.woodchat.server.message.Message;
-import com.woodchat.server.message.User;
+import com.woodchat.connection.message.Message;
+import com.woodchat.connection.message.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

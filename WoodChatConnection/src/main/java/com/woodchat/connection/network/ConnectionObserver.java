@@ -1,6 +1,6 @@
-package com.woodchat.server.network;
+package com.woodchat.connection.network;
 
-import com.woodchat.server.message.Message;
+import com.woodchat.connection.message.Message;
 
 public interface ConnectionObserver {
 

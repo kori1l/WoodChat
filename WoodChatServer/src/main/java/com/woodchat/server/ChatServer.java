@@ -1,9 +1,9 @@
 package com.woodchat.server;
 
-import com.woodchat.server.message.Message;
-import com.woodchat.server.message.User;
-import com.woodchat.server.network.SocketConnection;
-import com.woodchat.server.network.ConnectionObserver;
+import com.woodchat.connection.message.Message;
+import com.woodchat.connection.message.User;
+import com.woodchat.connection.network.SocketConnection;
+import com.woodchat.connection.network.ConnectionObserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;

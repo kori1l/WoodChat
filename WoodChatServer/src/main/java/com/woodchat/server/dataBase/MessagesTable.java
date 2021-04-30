@@ -1,7 +1,7 @@
 package com.woodchat.server.dataBase;
 
-import com.woodchat.server.message.Message;
-import com.woodchat.server.message.User;
+import com.woodchat.connection.message.Message;
+import com.woodchat.connection.message.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

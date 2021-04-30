@@ -1,7 +1,7 @@
-package com.woodchat.server.network;
+package com.woodchat.connection.network;
 
 
-import com.woodchat.server.message.Message;
+import com.woodchat.connection.message.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

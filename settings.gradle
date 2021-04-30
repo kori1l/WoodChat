@@ -1,4 +1,5 @@
 rootProject.name = 'WoodChat'
 include 'WoodChatClient'
 include 'WoodChatServer'
+include 'WoodChatConnection'
 
