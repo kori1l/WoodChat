@@ -14,8 +14,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class ClientForm extends JFrame implements ActionListener, ConnectionObserver {
-    private static final String IP_ADDRESS = "192.168.1.33";
-    private static final int PORT = 8080;
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 1000;
 
@@ -177,7 +175,9 @@ public class ClientForm extends JFrame implements ActionListener, ConnectionObse
 
     public void createConnection(String ip, String port, String userName, Color color) {
         try {
-            socketConnection = new SocketConnection(this, IP_ADDRESS, PORT);
+            if(socketConnection!=null)
+                socketConnection.disconnect();
+            socketConnection = new SocketConnection(this, ip, Integer.parseInt(port));
             clientUser.setUserName(userName);
             clientUser.setColor(color);
         } catch (IOException e) {

@@ -17,7 +17,6 @@ public class ChatServer implements ConnectionObserver {
     private LinkedList<Message> messagesList = new LinkedList<>();
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
         new ChatServer();
     }
 
