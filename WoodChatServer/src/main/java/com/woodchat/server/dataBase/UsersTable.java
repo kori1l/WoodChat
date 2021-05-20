@@ -1,6 +1,7 @@
 package com.woodchat.server.dataBase;
 
 import com.woodchat.connection.message.User;
+import com.woodchat.server.StorageData;
 
 import java.awt.*;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.logging.Level;
 
 public class UsersTable extends DataTable implements Operations {
     public UsersTable() throws SQLException {
@@ -22,8 +24,7 @@ public class UsersTable extends DataTable implements Operations {
                 "r_color INTEGER," +
                 "g_color INTEGER," +
                 "b_color INTEGER)");
-        System.out.println("таблица users создана");
-
+        StorageData.loggerDB.log(Level.INFO,"Таблица users создана...");
     }
 
 

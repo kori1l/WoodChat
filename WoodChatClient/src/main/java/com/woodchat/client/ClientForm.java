@@ -12,10 +12,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientForm extends JFrame implements ActionListener, ConnectionObserver {
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 1000;
+    static Logger loggerClient = Logger.getLogger(ClientForm.class.getName());
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -205,7 +208,7 @@ public class ClientForm extends JFrame implements ActionListener, ConnectionObse
 
     @Override
     public void onReceiveMessage(SocketConnection socketConnection, Message message) {
-        System.out.println(message.getText());
+        loggerClient.log(Level.INFO,message.getText());
         if (message.getUser().getUserName().equals("System")) {
             if (message.getText().contains("User exists")) {
                 if (message.getText().substring(11).equals(clientUser.getUserName())) {
@@ -248,9 +251,9 @@ public class ClientForm extends JFrame implements ActionListener, ConnectionObse
 
                 JPanel messageArea = new JPanel();
                 messageArea.setLayout(new BorderLayout());
-                Color backgroundMessage = new Color((message.getUser().getColor().getRed() + (255 - message.getUser().getColor().getRed()) / 2),
-                        (message.getUser().getColor().getGreen() + (255 - message.getUser().getColor().getGreen()) / 2),
-                        (message.getUser().getColor().getBlue() + (255 - message.getUser().getColor().getBlue()) / 2));
+                Color backgroundMessage = new Color(magicColor(message.getUser().getColor().getRed()),
+                        magicColor(message.getUser().getColor().getGreen()),
+                        magicColor(message.getUser().getColor().getBlue()));
                 messageArea.setBackground(backgroundMessage);
                 messageArea.setPreferredSize(new Dimension(300, 100));
                 messageArea.setBorder(new BevelBorder(1));
@@ -288,6 +291,9 @@ public class ClientForm extends JFrame implements ActionListener, ConnectionObse
                 messageScrollPanel.revalidate();
             }
         });
+    }
+    private int magicColor(int color){
+        return (color + (255 - color) / 2);
     }
 
 }

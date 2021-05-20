@@ -2,6 +2,7 @@ package com.woodchat.server.dataBase;
 
 import com.woodchat.connection.message.Message;
 import com.woodchat.connection.message.User;
+import com.woodchat.server.StorageData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.sql.Statement;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.logging.Level;
 
 public class MessagesTable extends DataTable implements Operations {
     public MessagesTable() throws SQLException {
@@ -23,9 +25,9 @@ public class MessagesTable extends DataTable implements Operations {
                 "text VARCHAR(2000) NOT NULL," +
                 "user BIGINT NOT NULL," +
                 "is_changed BIT)");
-        System.out.println("таблица messages создана");
+        StorageData.loggerDB.log(Level.INFO,"Таблица messages создана...");
         super.executeStatement("ALTER TABLE messages ADD FOREIGN KEY (user) REFERENCES users(uid)");
-        System.out.println("созданы связи");
+        StorageData.loggerDB.log(Level.INFO,"Связь messages-users создана...");
     }
 
 

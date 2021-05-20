@@ -5,12 +5,17 @@ import com.woodchat.connection.message.User;
 import com.woodchat.connection.network.SocketConnection;
 import com.woodchat.connection.network.ConnectionObserver;
 
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ChatServer implements ConnectionObserver {
+    static Logger logger = Logger.getLogger(ChatServer.class.getName());
     private final StorageData storageData = new StorageData();
     private final LinkedHashMap<SocketConnection, User> activeUserSet = new LinkedHashMap<>();
     private LinkedHashSet<User> userSetDB = new LinkedHashSet<>();
@@ -21,7 +26,7 @@ public class ChatServer implements ConnectionObserver {
     }
 
     private ChatServer() throws SQLException, ClassNotFoundException {
-        System.out.println("Server running...");
+        logger.log(Level.INFO, "Server running...");
         getAllUsers();
         getAllMessages();
         addUserDB(new User());
@@ -30,7 +35,7 @@ public class ChatServer implements ConnectionObserver {
                 try {
                     new SocketConnection(this, serverSocket.accept());
                 } catch (IOException e) {
-                    System.out.println("TCPConnection exception: " + e);
+                    logger.log(Level.WARNING, "TCPConnection exception: " + e);
                 }
             }
         } catch (IOException e) {
@@ -90,7 +95,7 @@ public class ChatServer implements ConnectionObserver {
 
     @Override
     public synchronized void onExpression(SocketConnection socketConnection, Exception e) {
-        System.out.println("TCP SocketConnection exception: " + e);
+        logger.log(Level.WARNING, "TCP SocketConnection exception: " + e);
     }
 
     private void sendAllConnections(Message message) {
@@ -115,7 +120,7 @@ public class ChatServer implements ConnectionObserver {
             message.getUser().setUserId(id);
             storageData.saveMessage(message);
         } else {
-            System.out.println("нет пользователя в базе");
+            StorageData.loggerDB.log(Level.WARNING, "Нет пользователя в баз");
         }
 
     }
@@ -131,16 +136,16 @@ public class ChatServer implements ConnectionObserver {
                 userSetDB.add(iterator.next());
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.toString());
         }
     }
 
     private synchronized void getAllMessages() {
         try {
             messagesList = storageData.getAllMessages();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.toString());
         }
     }
 

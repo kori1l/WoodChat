@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
 
 public class DataTable implements Closeable {
     Connection connection;
@@ -23,7 +24,7 @@ public class DataTable implements Closeable {
             if(connection != null && !connection.isClosed())
                 connection.close();
         } catch (SQLException e) {
-            System.out.println("Ошибка закрытия соединения: "+e);
+            StorageData.loggerDB.log(Level.WARNING,"Ошибка закрытия соединения: "+e);
         }
     }
     void executeStatement(String sqlQuery) throws SQLException{

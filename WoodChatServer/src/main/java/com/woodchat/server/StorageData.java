@@ -11,8 +11,11 @@ import java.sql.SQLException;
 
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StorageData {
+    public static Logger loggerDB = Logger.getLogger(StorageData.class.getName());
     public static final String DB_URL = "jdbc:h2:/c:/JavaH2DB/StorageDate";
     public static final String DB_Driver = "org.h2.Driver";
     MessagesTable messagesTable;
@@ -21,16 +24,14 @@ public class StorageData {
     public StorageData() {
         try {
             Class.forName(DB_Driver);
-            System.out.println("Драйвер найден");
+            loggerDB.log(Level.INFO,"Драйвер найден");
             usersTable = new UsersTable();
             messagesTable = new MessagesTable();
             createAllTables();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("JDBC драйвер для СУБД не найден!");
+            loggerDB.log(Level.WARNING,"JDBC драйвер для СУБД не найден!"+e);
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Ошибка SQL !");
+            loggerDB.log(Level.WARNING,"Ошибка SQL !"+e);
         }
     }
 
@@ -42,8 +43,8 @@ public class StorageData {
         try {
             usersTable.createTable();
             messagesTable.createTable();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
     }
@@ -51,8 +52,8 @@ public class StorageData {
     public void saveUser(User newUser) {
         try {
             usersTable.setData(newUser);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -63,8 +64,8 @@ public class StorageData {
     public void saveMessage(Message message) {
         try {
             messagesTable.setData(message);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
